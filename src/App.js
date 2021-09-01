@@ -1,23 +1,28 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import { useStateValue } from './StateProvider';
+
+
 
 function App() {
+
+  const [{user},dispatch] = useStateValue();
+
+
+  const hangeChangeUser = user => {
+    dispatch({
+      type: "SET_USER",
+      user
+    })
+  }
+
+  console.log(user, ":CURRENT")
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button onClick={()=> hangeChangeUser({name: 'aespa', email: 'aespa@gmail.com'}) } >Change User to aespa</button>
+      <button onClick={()=> hangeChangeUser({name: 'jhonny', email: 'johnathan@gmail.com'}) } >Change User to jhonny</button>
+      <button onClick={()=> hangeChangeUser({}) } >Set To Null</button>
     </div>
   );
 }
